@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        /* width: 800px; */
+        /* height: 800px; */
+        /* 指定一个容器采用网格布局。 默认为块级元素*/
+        display: grid; 
+        /* 也可以设置为行内元素 */
+        /* display: inline-grid; */
+        /* 设置每一列的宽度 */
+        grid-template-columns: 100px 100px 100px;
+        /* 可使用百分比 */
+        /* grid-template-columns: 33.33% 33.33% 33.33%; */
+        /* 使用repeat()函数简写 第一个参数重复的次数，第二个参数重复的值 ，或者重复某种模式 */
+        /* grid-template-columns: repeat(3, 33.33%);  */
+        /* grid-template-columns: repeat(2, 100px 20px 80px);  */
+        /* auto-fill关键字表示自动填充 */
+        /* grid-template-columns: repeat(auto-fill, 100px);  */
+        /* fr关键字，片段 */
+        /* fr关键字可以与绝对单位结合使用 */
+        /* grid-template-columns: 150px 1fr 2fr; 表示第一列宽度为150px，第二列的宽度是第三列的一半 */
+        /* minmax()函数产生一个长度范围。表示长度就在这个范围之内。接受两个参数。分别为最小值和最大值 */
+        /* grid-template-columns: 1fr 1fr minmax(100px, 1fr); 表示列宽不小于100px，不大于1fr */
+        /* auto关键字表示由浏览器决定长度 */
+        /* grid-template-columns: 100px auto 100px; 可以完成两端固定中间自适应的效果 */
+        /* 使用方括号，指定每一根网格线的名字，方便以后引用 */
+        /* grid-template-columns: [c1 first-line] 100px [c2] 100px [c3] auto [c4];
+        grid-template-rows: [r1] 1fr [r2] auto [r3] 2fr [r4]; */
+
+
+        /* 设置每一行的高度 */
+        grid-template-rows: repeat(4, 100px);
+
+        /* 设置行间距 */
+        /* grid-row-gap: 20px; */
+        /* 设置列间距 */
+        /* grid-column-gap: 20px; */
+        /* 简写 第一个参数行间距  第二个参数列间距*/
+        /* grid-gap: 20px 20px; */
+        /* 如果省略了第二个值，默认第二个值等于第一个值 */
+        /* grid-gap: 20px; grid前缀已删除 */
+        /* 直接row-gap column-gap gap */
+        gap: 20px 10px;
+
+        /* 设置区域。一个区域由多个或单个单元格组成 */
+        /* grid-template-areas: 'a a a'
+                            'b b b'
+                            'c c c';   */
+        /* grid-template属性是grid-template-column、grid-template-rows和grid-template-areas这三个属性的合并简写形式 */
+
+        /* 设置项目元素如何放置，默认先行后列 row */
+        /* grid-auto-flow: column; */
+        /* grid-auto-flow: row dense; 设置先行后列，先填满行*/
+        /* grid-auto-flow: column dense; 设置先列后行，先填满列 */
+        /* grid-auto-flow: row dense; */
+        /* justify-items: start | end | center | stretch; 设置单元格的水平位置（左中右）*/
+        /* align-items: flex-start | end | center | stretch; 设置单元格的垂直位置（上中下） */
+        /* place-items: center center; 上面的合并简写形式，第一个参数align-items 第二个参数 justify-items */
+        /* 如果省略第二个值 则浏览器认为与第一个值相等 */
+        /* place-items: stretch; */
+    
+        /* justify-content: start | center | end | stretch | space-around | space-between | space-evenly; 设置整个内容区域在容器里面的水平位置（左中右） */
+        /* align-content: start | center | end | stretch | space-around | space-between | space-evenly; (上中下) stretch项目大小未指定时，拉伸占据整个网格容器 */
+        /* place-content: center end; 上面的简写合并形式，第一个参数align-content */
+
+        /* grid-auto-rows: 100px; 设置浏览器自动创建的多余网格的列宽和行高（比如网格只要三列，但是某一个项目指定在第五行，浏览器会自动生成多余的网格，以便放置项目） */
+        /* grid-auto-columns: 50px; */
+        /* grid属性是grid-template-rows、grid-template-columns、grid-template-areas、grid-auto-rows、grid-auto-rows、grid-auto-column、grid-auto-flow的合并简写形式 */
+
+        /* grid-column-start属性：左边框所在的垂直网格线
+        grid-column-end属性：右边框所在的垂直网格线
+        grid-column属性是上面两个属性的合并简写形式 */
+
+        /* grid-row-start属性：上边框所在的水平网格线
+        grid-row-end属性：下边框所在的水平网格线
+        grid-row属性是上面两个属性的合并简写形式 grid-row： 1 / 3;*/
+        /* 属性值除了指定为第几网格线，还可以指定为网格线的名字 */
+
+        /* span关键字。跨越，即左右边框（上下边框）之间跨越多少个网格
+        grid-column-end: span 2; */
+        /* grid-auto-flow: column dense; */
+        /* place-items: center start; */
+        /* justify-items: start; */
+        place-content: space-between space-evenly;
+    }
+    .item {
+        text-align: center;
+        font-size: 36px;
+        line-height: 100px;
+        /* justify-self：start | end | center | stretch;属性设置单元格内容的水平位置（左中右） */
+        /* align-self: start | end | center | stretch; 属性设置单元格内容的垂直位置（上中下） */
+    }
+    .item-1 {
+        background-color: #ef342a;
+        /* grid-column-start: 1;
+        grid-column-end: 3;   */
+        /* justify-self: start; */
+        /* align-self: center; */
+    }
+
+    .item-2 {
+        background-color: #f68f26;
+        /* grid-column-start: 1;
+        grid-column-end: 3;   */
+    }
+
+    .item-3 {
+        background-color: #4ba946;
+    }
+
+    .item-4 {
+        background-color: #0376c2;
+        /* grid-row-start: 3;
+        grid-column-start: 1; */
+    }
+
+    .item-5 {
+        background-color: #c077af;
+    }
+
+    .item-6 {
+        background-color: #f8d29d;
+    }
+
+    .item-7 {
+        background-color: #b5a87f;
+        /* grid-row-start: 2;
+        grid-column-start: 1; */
+    }
+
+    .item-8 {
+        background-color: #d0e4a9;
+        /* grid-row-start: 4;
+        grid-column-start: 2; */
+    }
+    .item-9 {
+        background-color: #4dc7ec;
+        /* grid-row-start: 5;
+        grid-column-start: 3; */
+    }
+</style>
+<body>
+    <!-- 容器 -->
+    <div class="container">
+        <!-- 项目 -->
+        <div class="item item-1">1</div>
+        <div class="item item-2">2</div>
+        <div class="item item-3">3</div>
+        <div class="item item-4">4</div>
+        <div class="item item-5">5</div>
+        <div class="item item-6">6</div>
+        <div class="item item-7">7</div>
+        <div class="item item-8">8</div>
+        <div class="item item-9">9</div>
+    </div>
+</body>
+</html>
